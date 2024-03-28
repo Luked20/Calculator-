@@ -3,7 +3,7 @@ from tkinter import ttk
 
 from colorama import Fore, Back, Style
  
-
+#inicialição da calculadora 
 init = Tk()
 init.title("Calculadora")
 init.geometry('357x420+0+0')
@@ -12,14 +12,14 @@ text_parameter.grid(columnspan=5)
 calcular = ""
 
     
-
+#adição dos numeros na width
 def add_to_calc(symbol):
     global calcular
     calcular += str(symbol)
     text_parameter.delete(0, "end")
     text_parameter.insert(0 , calcular)
 
-
+#confirmação de contaa 
 def evaluate_calc():
     global calcular
     try: 
@@ -30,7 +30,7 @@ def evaluate_calc():
         clear_calc()
         text_parameter.insert(0, "Error")
         pass
-    
+#exclusão da conta(clear)   
 def clear_calc():
     global calcular  
     calcular = ""  
@@ -38,7 +38,7 @@ def clear_calc():
     if(text_parameter == 0):
             return btn_0 
     
-
+#botoes 
 btn_1 = Button(init, text="1",command=lambda: add_to_calc(1), width=5, font=("Arial", 14) )
 btn_1.grid(row=1, column=1)
 btn_2 = Button(init, text="2",command=lambda: add_to_calc(2), width=5, font=("Arial", 14) )
@@ -76,7 +76,7 @@ btn_equal.grid(row=5, column=1, columnspan=2)
 btn_clear = Button(init, text="C",command= clear_calc, width=5, font=("Arial", 14) )
 btn_clear.grid(row=5, column=3)
 
-
+#segunda janela(calculador cientifica)
 def open_second_window():
     second_window = Toplevel(init)
     btn_second =Button(init, text="Calculador cientifica", command= open_second_window)
@@ -111,22 +111,20 @@ def open_second_window():
             return btn_0
      
   
-
-    def calc_potencia(number):
+#problemas com a função calc_potencia o operador *= não satisfaz strings diferentemente de += tentando achar uma lógica para conseguir fazer a potenciação 
+    def calc_potencia(symbol):
       global calcular
-    
-      exponent = int(Entry(exponent.get()))  # Obtenha o valor atual do expoente do widget Entry
-      calcular **= exponent
+      calcular *= str(symbol)
       text_parameter.delete(0, "end")
       text_parameter.insert(0, str(calcular))
-      Entry(exponent.insert("end", str(number))) 
+      
     
         
        
      
         
 
-
+#botoes para segunda janela 
     btn_1 = Button(second_window, text="1",command=lambda: add_to_calc(1), width=5, font=("Arial", 14) )
     btn_1.grid(row=1, column=1)
     btn_2 = Button(second_window, text="2",command=lambda: add_to_calc(2), width=5, font=("Arial", 14) )
@@ -157,9 +155,13 @@ def open_second_window():
 open_second_window()
 
 
-    
+#execução do calculadora   
 init.mainloop()
     
+        
+       
+     
+        
 
     
 
