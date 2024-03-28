@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import math
-from math import sqrt, sin 
+import math
 from colorama import Fore, Back, Style
 
 
@@ -88,7 +88,7 @@ def open_second_window():
     second_window.geometry('357x420+0+0')
     text_parameter1 =Entry(second_window, width=20, font=("Arial", 24))  
     text_parameter1.grid(columnspan=5) 
-#Repetição da calculadora simples 
+
     def add_to_calc(symbol):
      global calcular
      calcular += str(symbol)
@@ -114,7 +114,7 @@ def open_second_window():
      text_parameter1.delete(0, "end")
      if(text_parameter == 0):
             return btn_0
-#função para calcular a potencia
+     
     def pot(symbol):
      global calcular
      calcular += str(symbol)
@@ -127,7 +127,7 @@ def open_second_window():
         text_parameter1.delete(0, "end")
         text_parameter1.insert(0, str(resultado))
     
-#função para calcular a raiz quadrada
+
     def root(symbol):
      global calcular
      calcular += str(symbol)
@@ -144,7 +144,7 @@ def open_second_window():
                 text_parameter1.delete(0, "end")
                 text_parameter1.insert(0, "Erro: " + str(e))
     
-#atualmente tentando descobrir como fazer a função do seno funcionar para que usar o eval não esta dando certo 
+
     def sin(symbol):
      global calcular
      calcular += str(symbol)
@@ -153,15 +153,60 @@ def open_second_window():
         if i in calcular:
             calcular = calcular.replace("sin", "")
             try:
-                resultado = math.sin(math.radians(eval(calcular)))  
+                resultado = math.sin(math.radians(float(calcular)))  
                 text_parameter1.delete(0, "end")
                 text_parameter1.insert(0, str(resultado))
             except Exception as e:
                 text_parameter1.delete(0, "end")
                 text_parameter1.insert(0, "Erro: " + str(e))
-         
+    
+
+    def cos(symbol):
+     global calcular
+     calcular += str(symbol)
+     modulos = ["cos"]
+     for i in modulos:
+        if i in calcular:
+            calcular = calcular.replace("cos", "")
+            try:
+                resultado = math.cos(math.radians(float(calcular)))  
+                text_parameter1.delete(0, "end")
+                text_parameter1.insert(0, str(resultado))
+            except Exception as e:
+                text_parameter1.delete(0, "end")
+                text_parameter1.insert(0, "Erro: " + str(e))
+
+    def pi(symbol):
+     global calcular
+     calcular += str(symbol)
+     modulos = ["pi"]  
+     for i in modulos:
+        if i in calcular:
             
-   
+            calcular = calcular.replace("pi", "")
+            try:
+                resultado = math.pi
+                text_parameter1.delete(0, "end")
+                text_parameter1.insert(0, str(resultado))
+            except Exception as e:
+                text_parameter1.delete(0, "end")
+                text_parameter1.insert(0, "Erro: " + str(e))        
+    
+
+    def log(symbol):
+     global calcular
+     calcular += str(symbol)
+     modulos = ["log"]
+     for i in modulos:
+        if i in calcular:
+            calcular = calcular.replace("log", "")
+            try:
+                resultado = math.log(float(calcular))  
+                text_parameter1.delete(0, "end")
+                text_parameter1.insert(0, str(resultado))
+            except Exception as e:
+                text_parameter1.delete(0, "end")
+                text_parameter1.insert(0, "Erro: " + str(e))
     
         
        
@@ -195,6 +240,16 @@ def open_second_window():
     btn_root.grid(row=2, column=4)
     btn_sin = Button(second_window, text="sin", command=lambda: sin("sin"), width=5, font=("Arial", 14))
     btn_sin.grid(row=3, column=4)
+    btn_cos = Button(second_window, text="cos", command=lambda: cos("cos"), width=5, font=("Arial", 14))
+    btn_cos.grid(row=4, column=4)
+    btn_bracketsopn1 = Button(second_window, text="(",command=lambda: add_to_calc("("), width=5, font=("Arial", 14) )
+    btn_bracketsopn1.grid(row=4, column=1)
+    btn_bracketsclose1 = Button(second_window, text=")",command=lambda: add_to_calc(")"), width=5, font=("Arial", 14) )
+    btn_bracketsclose1.grid(row=4, column=3)
+    btn_pi = Button(second_window, text="pi", command=lambda: pi("pi"), width=5, font=("Arial", 14))
+    btn_pi.grid(row=5, column=4)
+    btn_log = Button(second_window, text="log", command=lambda: log("log"), width=5, font=("Arial", 14))
+    btn_log.grid(row=6, column=4)
     btn_equal = Button(second_window, text="=",command= evaluate_calc, width=15, font=("Arial", 14) )
     btn_equal.grid(row=5, column=1, columnspan=2) 
     btn_clear = Button(second_window, text="C",command= clear_calc, width=5, font=("Arial", 14) )
